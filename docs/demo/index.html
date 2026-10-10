@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="uz" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FOOG Demo — video va ssenariy</title>
+<meta name="description" content="FOOG demo videosi, demo tavsifi, tayyor video ssenariysi va ishlaydigan prototipga havola.">
+<meta name="theme-color" content="#050815">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Asosiy kontentga o‘tish</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="FOOG — bosh sahifa"><img src="../assets/wordmark.svg" alt="FOOG" width="88" height="22"></a>
+    <button class="menu-btn" aria-label="Menyu" aria-expanded="false" aria-controls="nav-links">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="nav-links" aria-label="Asosiy">
+      <a href="../#yechim">Yechim</a>
+      <a href="../#roadmap">Roadmap</a>
+      <a href="../#texnologiya">Texnologiya</a>
+      <a href="./" aria-current="page">Demo</a>
+      <a href="../booking/">Bron demo</a>
+      <a class="btn btn-primary btn-sm" href="../prototype/">Prototipni ochish</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding-bottom:48px">
+    <div class="glow v"></div>
+    <div class="wrap">
+      <div class="sec-head reveal" style="margin-bottom:32px">
+        <p class="eyebrow">Demo</p>
+        <h1 style="font-size:clamp(36px,6vw,64px)">FOOG <span class="hl">3 daqiqada</span></h1>
+        <p class="lead">Stadion topishdan bron tasdiqlanishigacha — o‘yinchi va stadion egasi nigohida.</p>
+      </div>
+
+      <!-- Video: tayyor bo'lgach data-src ga YouTube embed yoki .mp4 manzilini yozing -->
+      <div class="video-box reveal" id="video" data-src="">
+        <div style="padding:24px">
+          <div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></div>
+          <h3>Demo video tez orada</h3>
+          <p class="muted small" style="margin-top:8px">1–5 daqiqalik video yuklanadi. Hozircha quyidagi ssenariy va jonli prototipdan foydalaning.</p>
+          <div class="cta-row" style="justify-content:center;margin-top:20px">
+            <a class="btn btn-primary btn-sm" href="../prototype/">Jonli prototip</a>
+            <a class="btn btn-ghost btn-sm" href="../booking/">Bron oqimi demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="divider" style="padding-top:64px">
+    <div class="wrap grid g2" style="gap:24px;align-items:start">
+      <div class="card reveal">
+        <p class="eyebrow">Demo tavsifi</p>
+        <h3>Nimani ko‘rsatamiz</h3>
+        <ul>
+          <li><b>Kirish:</b> “Telegram orqali kirish” → bot tasdig‘i → hisob yaratiladi. Parol yo‘q.</li>
+          <li><b>Rol:</b> futbolchi yoki stadion egasi; bitta akkaunt ikkalasiga ham ega bo‘la oladi.</li>
+          <li><b>Onboarding:</b> pozitsiya, kuchli oyoq, daraja, shahar.</li>
+          <li><b>Bron:</b> stadion → sana → bo‘sh slot → ushlab turish (10 daq) → so‘rov → egasi tasdig‘i.</li>
+          <li><b>Ishonchlilik:</b> bir slotga ikki bron — imkonsiz (baza darajasida himoya).</li>
+          <li><b>Jarayon:</b> AI agentlar bilan ticket → review → merge sikli.</li>
+        </ul>
+        <h3 style="margin-top:12px">Demo’da nima haqiqiy</h3>
+        <div class="grid" style="gap:10px">
+          <div class="notice info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>/prototype</b> — haqiqiy FOOG ilova kodi, web eksport, <b>mock rejim</b>: Telegram kirish simulyatsiya qilinadi (6 soniyadan so‘ng avtomatik tasdiq). Backend ulanmagan — ma’lumot bloklari “Yuklab bo‘lmadi” holatini ko‘rsatadi.</span></div>
+          <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span><b>/booking</b> — bron oqimining statik interaktiv konsepti (FOOG dizayni asosida). Ilovadagi stadion va bron ekranlari hali ishlab chiqilmoqda (TASK-073, 074).</span></div>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <p class="eyebrow">Video ssenariysi · ~3 daqiqa</p>
+        <div class="script">
+          <div class="scene"><span class="t">0:00–0:20</span><div><p><em>Kadr:</em> Telegram guruhda “Bugun 20:00 da maydon bo‘shmi?” xabarlari, javobsiz qo‘ng‘iroqlar.</p><p><em>Ovoz:</em> “Toshkentda futbol o‘ynash oson. Maydon topish — yo‘q.”</p></div></div>
+          <div class="scene"><span class="t">0:20–0:40</span><div><p><em>Kadr:</em> FOOG logotipi, sayt hero bloki.</p><p><em>Ovoz:</em> “FOOG — stadion topish, bo‘sh vaqtni ko‘rish va bron qilish uchun bitta ilova.”</p></div></div>
+          <div class="scene"><span class="t">0:40–1:10</span><div><p><em>Ekran:</em> /prototype — tilni tanlash, “Telegram orqali kirish”, kutish ekrani, avtomatik tasdiq.</p><p><em>Ovoz:</em> “Parol yo‘q. Telegram orqali bir martalik tasdiq.”</p></div></div>
+          <div class="scene"><span class="t">1:10–1:30</span><div><p><em>Ekran:</em> “Futbolchi” roli → onboarding (Hujumchi, O‘ng oyoq, O‘rta) → bosh ekran.</p></div></div>
+          <div class="scene"><span class="t">1:30–2:20</span><div><p><em>Ekran:</em> /booking — stadion tanlash, sana, bo‘sh slot, “Bron qilish”, 10 daqiqalik taymer, so‘rov yuborildi; egasi rejimiga o‘tib “Tasdiqlash”.</p><p><em>Ovoz:</em> “Slot siz uchun ushlab turiladi. Egasi tasdiqlaydi — bron tayyor. To‘lov stadionda.”</p></div></div>
+          <div class="scene"><span class="t">2:20–2:45</span><div><p><em>Kadr:</em> Sayt “Implementation” bo‘limi: monorepo, PostgreSQL, testlar, AI agentlar sxemasi.</p><p><em>Ovoz:</em> “Har bir o‘zgarish alohida agent tomonidan yoziladi va reviewer tomonidan testlar bilan tekshiriladi.”</p></div></div>
+          <div class="scene"><span class="t">2:45–3:00</span><div><p><em>Kadr:</em> Roadmap — MVP 69%, keyingi qadamlar. Sayt manzili.</p><p><em>Ovoz:</em> “FOOG. Stadion top. Vaqtni ko‘r. Bron qil.”</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="../assets/wordmark.svg" alt="FOOG" width="72" height="18">
+    <nav aria-label="Pastki"><a href="../">Bosh sahifa</a><a href="../prototype/">Prototip</a><a href="../booking/">Bron demo</a><a href="../api/">API Access</a></nav>
+    <span>© 2026 FOOG · Pitch Day 3.0</span>
+  </div>
+</footer>
+<script>
+  // Video manzili berilgan bo'lsa (data-src), placeholder o'rniga player qo'yiladi.
+  (function () {
+    var box = document.getElementById('video');
+    var src = box && box.dataset.src;
+    if (!src) return;
+    var el;
+    if (/\.(mp4|webm)(\?|$)/i.test(src)) {
+      el = document.createElement('video');
+      el.src = src; el.controls = true; el.playsInline = true; el.preload = 'metadata';
+    } else {
+      el = document.createElement('iframe');
+      el.src = src; el.title = 'FOOG demo video'; el.allow = 'accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+      el.allowFullscreen = true; el.loading = 'lazy';
+    }
+    box.innerHTML = '';
+    box.appendChild(el);
+  })();
+</script>
+<script src="../assets/main.js" defer></script>
+</body>
+</html>

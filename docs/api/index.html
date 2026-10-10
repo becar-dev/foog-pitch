@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="uz" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FOOG API Access</title>
+<meta name="description" content="FOOG REST API v1 tuzilmasi: auth, stadionlar, bronlar. Maxfiy ma’lumotsiz ommaviy ko‘rinish.">
+<meta name="theme-color" content="#050815">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+<style>
+  .ep { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: baseline; padding-block: 12px; border-bottom: 1px solid var(--border); }
+  .ep:last-child { border-bottom: 0; }
+  .ep code { color: var(--text1); word-break: break-all; }
+  .ep p { grid-column: 2; color: var(--text2); font-size: 14px; }
+  @media (max-width: 560px) { .ep { grid-template-columns: 1fr; } .ep p { grid-column: 1; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Asosiy kontentga o‘tish</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="FOOG — bosh sahifa"><img src="../assets/wordmark.svg" alt="FOOG" width="88" height="22"></a>
+    <button class="menu-btn" aria-label="Menyu" aria-expanded="false" aria-controls="nav-links">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="nav-links" aria-label="Asosiy">
+      <a href="../">Bosh sahifa</a>
+      <a href="../demo/">Demo</a>
+      <a href="./" aria-current="page">API Access</a>
+      <a class="btn btn-primary btn-sm" href="../prototype/">Prototipni ochish</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section style="padding-top:48px">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">API Access</p>
+        <h1 style="font-size:clamp(34px,5vw,56px)">FOOG REST API <span class="hl">v1</span></h1>
+        <p class="lead">Ilova va backend o‘rtasidagi kontrakt bitta manbadan — <code>@foog/contracts</code> (zod sxemalari). Quyida asosiy endpointlar tuzilmasi.</p>
+        <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>Ommaviy API hali ochilmagan: production deploy (TASK-092) rejada. Bu sahifada kalit, token yoki server manzili yo‘q. Hamkorlik uchun kirish — jamoa orqali so‘rov bilan.</span></div>
+      </div>
+
+      <div class="grid g2" style="align-items:start">
+        <div class="card reveal">
+          <h3>Umumiy qoidalar</h3>
+          <ul>
+            <li>Base: <code>/api/v1</code> · JSON, UTF-8</li>
+            <li>Auth: <code>Authorization: Bearer &lt;accessToken&gt;</code></li>
+            <li>Vaqt — ISO 8601 UTC, ko‘rsatish Asia/Tashkent bo‘yicha</li>
+            <li>Pul — so‘mda butun son</li>
+            <li>Sahifalash: <code>?cursor=&amp;limit=</code> → <code>{ items, nextCursor }</code></li>
+          </ul>
+          <pre>{ "success": true,  "data": { ... } }
+{ "success": false, "error": { "code": "SLOT_TAKEN", "message": "..." } }</pre>
+          <p class="small">Asosiy xato kodlari: <code>VALIDATION_ERROR</code> 400 · <code>UNAUTHORIZED</code> 401 · <code>FORBIDDEN</code> 403 · <code>NOT_FOUND</code> 404 · <code>SLOT_TAKEN</code> 409 · <code>INVALID_STATE</code> 409 · <code>RATE_LIMITED</code> 429</p>
+        </div>
+
+        <div class="card reveal">
+          <h3>Auth — Telegram</h3>
+          <div>
+            <div class="ep"><span class="method m-post">POST</span><code>/auth/telegram/start</code><p>Bir martalik nonce va bot havolasi</p></div>
+            <div class="ep"><span class="method m-get">GET</span><code>/auth/telegram/status?nonce=</code><p>PENDING · VERIFIED (tokenlar faqat bir marta) · EXPIRED</p></div>
+            <div class="ep"><span class="method m-post">POST</span><code>/auth/refresh</code><p>Refresh token rotatsiyasi; qayta ishlatilsa — butun oila bekor</p></div>
+            <div class="ep"><span class="method m-get">GET</span><code>/me</code><p>Joriy foydalanuvchi profili</p></div>
+            <div class="ep"><span class="method m-patch">PATCH</span><code>/me</code><p>Profil va o‘yinchi ma’lumotlari</p></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3>Stadionlar</h3>
+          <div>
+            <div class="ep"><span class="method m-get">GET</span><code>/stadiums</code><p>Filtrlar: tuman, format, qoplama, narx, sana/vaqt, geo radius, saralash</p></div>
+            <div class="ep"><span class="method m-get">GET</span><code>/stadiums/:id</code><p>Maydonlar, ish vaqti, qulayliklar, reyting</p></div>
+            <div class="ep"><span class="method m-get">GET</span><code>/stadiums/:id/availability?date=</code><p>Slotlar: FREE · BOOKED · BLOCKED · PAST, pik narx</p></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3>Bronlar</h3>
+          <div>
+            <div class="ep"><span class="method m-post">POST</span><code>/bookings/hold</code><p>Slotni 10 daqiqaga ushlash → HELD; band bo‘lsa 409</p></div>
+            <div class="ep"><span class="method m-post">POST</span><code>/bookings/:id/submit</code><p>HELD → PENDING (egasiga so‘rov)</p></div>
+            <div class="ep"><span class="method m-post">POST</span><code>/bookings/:id/cancel</code><p>Bekor qilish</p></div>
+            <div class="ep"><span class="method m-get">GET</span><code>/bookings/my</code><p>Mening bronlarim</p></div>
+            <div class="ep"><span class="method m-post">POST</span><code>/owner/bookings/:id/confirm</code><p>Egasi: PENDING → CONFIRMED</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:16px">
+        <h3>Bron holatlari</h3>
+        <pre>HELD ──submit──▶ PENDING ──confirm──▶ CONFIRMED ──▶ COMPLETED | NO_SHOW
+  │                  ├──reject──▶ REJECTED
+  └─(10 daq)──▶ EXPIRED   └──cancel──▶ CANCELLED</pre>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="../assets/wordmark.svg" alt="FOOG" width="72" height="18">
+    <nav aria-label="Pastki"><a href="../">Bosh sahifa</a><a href="../demo/">Demo</a><a href="../prototype/">Prototip</a><a href="../booking/">Bron demo</a></nav>
+    <span>© 2026 FOOG · Pitch Day 3.0</span>
+  </div>
+</footer>
+<script src="../assets/main.js" defer></script>
+</body>
+</html>
